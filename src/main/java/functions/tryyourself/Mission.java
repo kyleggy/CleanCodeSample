@@ -11,14 +11,22 @@ public class Mission {
 
     LocalDate start = LocalDate.parse("2023-02-23");
 
-    public void update(String author, String message) {
-        LocalDate today = LocalDate.now();
-        String month = String.valueOf(today.getMonthValue());
-        String formattedMonth = month.length() < 2 ? "0" + month : month;
-        String entry = author.toUpperCase() + ": [" + formattedMonth + "-" +
-                today.getDayOfMonth() + "-" + today.getYear() + "](Day " +
-                (ChronoUnit.DAYS.between(start, today) + 1) + ")> " +
-                message + System.lineSeparator();
+//    public void update(String author, String message) {
+//        LocalDate today = LocalDate.now();
+//        String month = String.valueOf(today.getMonthValue());
+//        String formattedMonth = month.length() < 2 ? "0" + month : month;
+//        String entry = author.toUpperCase() + ": [" + formattedMonth + "-" +
+//                today.getDayOfMonth() + "-" + today.getYear() + "](Day " +
+//                (ChronoUnit.DAYS.between(start, today) + 1) + ")> " +
+//                message + System.lineSeparator();
+//        System.out.println(entry);
+//    }
+
+    void update(String author, String message) {
+        final LocalDate today = LocalDate.now();
+        String entry = String.format("%S: [%tm-%<te-%<tY](Day %d)> %s%n",
+                author, today,
+                ChronoUnit.DAYS.between(start, today) + 1, message);
         System.out.println(entry);
     }
 }

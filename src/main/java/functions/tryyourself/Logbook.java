@@ -18,15 +18,29 @@ public class Logbook {
     static final Path CAPTAIN_LOG = Paths.get("/var/log/captain.log");
     static final Path CREW_LOG = Paths.get("/var/log/crew.log");
 
-    public void log(String message, boolean classified) throws IOException {
-        if (classified) {
-            writeMessage(message, CAPTAIN_LOG);
-        } else {
-            writeMessage(message, CREW_LOG);
-        }
+//    public void log(String message, boolean classified) throws IOException {
+//        if (classified) {
+//            writeMessage(message, CAPTAIN_LOG);
+//        } else {
+//            writeMessage(message, CREW_LOG);
+//        }
+//    }
+//
+//    public void writeMessage(String message, Path location) throws IOException {
+//        String entry = LocalDate.now() + " " + message;
+//        Files.write(location, Collections.singleton(entry),
+//                StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+//    }
+
+    void writeToCaptainLog(String message) throws IOException {
+        writeMessage(message, CAPTAIN_LOG);
     }
 
-    public void writeMessage(String message, Path location) throws IOException {
+    void writeToCrewLog(String message) throws IOException {
+        writeMessage(message, CREW_LOG);
+    }
+
+    void writeMessage(String message, Path location) throws IOException {
         String entry = LocalDate.now() + " " + message;
         Files.write(location, Collections.singleton(entry),
                 StandardCharsets.UTF_8, StandardOpenOption.APPEND);
